@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "interactive"
+version = "0.1.0"
+description = ""
+authors = ["jorgebarcelos <jorgebarcelos.faria@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "4.2.5"
+django-extensions = "^3.2.3"
+django-ninja = "^0.22.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
