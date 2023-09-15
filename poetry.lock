@@ -35,6 +35,19 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-cpf-cnpj"
+version = "1.0.0"
+description = "A django model and form field for normalised cpf and cnpj."
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "django_cpf_cnpj-1.0.0-py3-none-any.whl", hash = "sha256:9e3400b8181d9f4dd99ebd5d3c2d127d1180cb9a4e5448145f6904629c61ad12"},
+]
+
+[package.dependencies]
+Django = ">=2.2"
+
+[[package]]
 name = "django-extensions"
 version = "3.2.3"
 description = "Extensions for Django"
@@ -161,4 +174,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "05cd7527795c47f7a114d6cf9f97c6558342f1878eb4d012c6bdec2979f1685c"
+content-hash = "b55a5387efd5b31739e1e717b70afde40391b2a9d6fb5935fa4902f22edfda90"

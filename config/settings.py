@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'django_ninja',
+    'django_cpf_cnpj',
 
     'cpq',
 ]

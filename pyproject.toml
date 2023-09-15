@@ -10,6 +10,7 @@ python = "^3.11"
 django = "4.2.5"
 django-extensions = "^3.2.3"
 django-ninja = "^0.22.2"
+django-cpf-cnpj = "^1.0.0"
 
 
 [build-system]
