@@ -24,9 +24,8 @@ class Material(models.Model):
     name = models.CharField(max_length=55)
     description = models.TextField()
     unit = models.CharField(max_length=55)
-    image = models.ImageField()
-    manufacturer = models.ForeignKey(Manufacturer)
-    supplier = models.ForeignKey(Supplier)
+    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
+    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
 
     STATE = [
         ('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'), ('AM', 'Amazonas'), ('BA', 'Bahia'), 

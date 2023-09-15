@@ -13,19 +13,19 @@ SupplierSchema = create_schema(Supplier)
 MaterialSchema = create_schema(Material)
 
 
-@router.post('')
+@router.post('manufacturer/')
 def create_manufacture(request, payload: ManufacturerSchema):
     query_set = Manufacturer.objects.create(**payload.dict())
     return {"nome": query_set.name}
 
 
-@router.post('')
+@router.post('supplier/')
 def create_supplier(request, payload: SupplierSchema):
     query_set = Manufacturer.objects.create(**payload.dict())
     return {"nome": query_set.name}
 
 
-@router.post('')
+@router.post('material/')
 def create_material(request, payload: MaterialSchema):
     query_set = Material.objects.create(**payload.dict())
     return {"nome": query_set.name}
