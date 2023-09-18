@@ -1,22 +1,43 @@
-from django_cpf_cnpj.fields import CNPJField
 from django.db import models
+from cpq.utils import formatters, validators
 
+validator = validators.Validator()
 
 class Manufacturer(models.Model):
     name = models.CharField('Nome', max_length=100)
-    cnpj = CNPJField(masked=True)
+    cnpj = models.CharField(max_length=14, verbose_name='CNPJ')
+
 
     def __str__(self) -> str:
         return self.name
+
+    @property
+    def formated_cpf_cnpj(self):
+        return formatters.cpf_cnpj(self.cnpj)
+
+    @formated_cpf_cnpj.setter
+    def cpf_cnpj_formated(self, value):
+        validator.cpf_cnpj_validator(value)
+        self.cnpj = validator.mask_number_removal(value)
 
 
 class Supplier(models.Model):
     name = models.CharField('Nome', max_length=100)
-    cnpj = CNPJField(masked=True)
+    cnpj = models.CharField(max_length=14, verbose_name='CNPJ')
+
 
     def __str__(self) -> str:
         return self.name
 
+    @property
+    def formated_cpf_cnpj(self):
+        return formatters.cpf_cnpj(self.cnpj)
+    
+    @formated_cpf_cnpj.setter
+    def cpf_cnpj_formated(self, value):
+        validator.cpf_cnpj_validator(value)
+        self.cnpj = validator.mask_number_removal(value)
+        
 
 class Material(models.Model):
     ncm_code = models.IntegerField()
