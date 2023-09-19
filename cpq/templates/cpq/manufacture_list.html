@@ -1,23 +1,33 @@
-{% load static %}
+{% extends "cpq/base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Fabricantes</title>
-</head>
-<body>
-    <h1>Fabricantes</h1>
+{% block manufacture_list %}
 
-    <ul>
-    </ul>
+    <title>{% block title %}Fabricantes{% endblock title %}</title>
+    <h1 style="text-align: center; padding-top: 10px;">Fabricantes</h1>
 
-    <p>Click no botão para listar os fabricantes.</p>
-
-    <button onclick="listManufacturers()">Listar</button>
-
-
-    <script src="{% static "js/manufacture.js" %}"></script>
-</body>
-</html>
+    <div class="container mt-5 mb-5 justify-content-center align-items-center flex-column">
+        <div class="table-responsive" style="text-align: center;">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <!-- Começo Cabeçalho -->
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">CNPJ</th>
+                    </tr>
+                    <!-- Fim Cabeçalho -->
+                </thead>
+                
+                <tbody>
+                    <!-- Inicio Corpo Tabela-->
+                    {% for manufacturer in manufacturers %}
+                        <tr>
+                            <td>{{ manufacturer.name }}</td>
+                            <td>{{ manufacturer.cnpj }}</td>
+                        </tr>
+                    {% endfor %}
+                    <!-- Fim Corpo Tabela-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock manufacture_list %}
