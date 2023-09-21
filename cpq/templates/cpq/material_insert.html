@@ -1,0 +1,32 @@
+{% extends "cpq/base.html" %}
+{% load widget_tweaks %}
+
+{% block material_insert %}
+    <title>{% block title %}Inserir Material{% endblock title %}</title>
+    
+    <h1 style="text-align: center; padding-top: 20px;">Inserir Material</h1>
+
+    <div class="container col-md-4">
+        <div class="col align-self-center">
+            <form method="post" style="text-align: center; padding-top: 20px;">{% csrf_token %}
+                {% render_field form.ncm_code placeholder="ncm_code" class+="form-control" %}
+                <br>
+                {% render_field form.material_code placeholder="Código do Material" class+="form-control" %}
+                <br>
+                {% render_field form.name placeholder="Nome" class+="form-control" %}
+                <br>
+                {% render_field form.description placeholder="Descrição" class+="form-control" %}
+                <br>
+                {% render_field form.unit placeholder="Unidade" class+="form-control" %}
+                <br>
+                {% render_field form.manufacturer placeholder="Fabricante" class+="form-control" %}
+                <br>
+                {% render_field form.supplier placeholder="Fornecedor" class+="form-control" %}
+                <br>
+                {% render_field form.state placeholder="Estado de Origem" class+="form-control" %}
+                <br>
+                <button type="submit" name="manufacture_insert" class="btn btn-outline-primary">Inserir</button>
+            </form>
+        </div>
+    </div>
+{% endblock material_insert %}

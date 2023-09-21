@@ -4,8 +4,8 @@ from cpq.utils import formatters, validators
 validator = validators.Validator()
 
 class Manufacturer(models.Model):
-    name = models.CharField('Nome', max_length=100)
-    cnpj = models.CharField(max_length=14, verbose_name='CNPJ')
+    name = models.CharField(max_length=100, unique=True)
+    cnpj = models.CharField(max_length=14, unique=True)
 
 
     def __str__(self) -> str:
@@ -22,8 +22,8 @@ class Manufacturer(models.Model):
 
 
 class Supplier(models.Model):
-    name = models.CharField('Nome', max_length=100)
-    cnpj = models.CharField(max_length=14, verbose_name='CNPJ')
+    name = models.CharField(max_length=100, unique=True)
+    cnpj = models.CharField(max_length=14, unique=True)
 
 
     def __str__(self) -> str:
