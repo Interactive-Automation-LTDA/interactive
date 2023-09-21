@@ -9,7 +9,7 @@
     <div class="container col-md-4">
         <div class="col align-self-center">
             <form method="post" style="text-align: center; padding-top: 20px;">{% csrf_token %}
-                {% render_field form.ncm_code placeholder="ncm_code" class+="form-control" %}
+                {% render_field form.ncm_code placeholder="Código NCM" class+="form-control" %}
                 <br>
                 {% render_field form.material_code placeholder="Código do Material" class+="form-control" %}
                 <br>
