@@ -9,6 +9,11 @@ class ManufacturerForm(forms.ModelForm):
         model = Manufacturer
         fields = ['name', 'cnpj']
 
+
+        labels = {
+            'name': 'Digite seu nome'
+        }
+
     def clean_name(self):
         manufacturer_name = self.cleaned_data.get('name')
         for instance in Manufacturer.objects.all():
