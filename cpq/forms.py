@@ -1,21 +1,28 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from .models import Manufacturer, Supplier, Material
 
-class ManufacturerForm(ModelForm):
-    # name = forms.CharField()
-    # cnpj = forms.CharField()
+class ManufacturerForm(forms.ModelForm):
 
     class Meta:
         model = Manufacturer
         fields = ['name', 'cnpj']
 
-    def clean_manufacturer_name(self):
-        name = self.cleaned_data('name')
+    def clean_name(self):
+        manufacturer_name = self.cleaned_data.get('name')
         for instance in Manufacturer.objects.all():
-            if instance.name == name:
-                raise forms.ValidationError(str(name) + ' is already created')
-        return name
+            if instance.name == manufacturer_name:
+                raise ValidationError(f'O Fabricante {instance.name} já existe')
+        return manufacturer_name
+    
+        # manufacturer_name = self.cleaned_data.get('name')
+        # manufacturer_cnpj = self.cleaned_data.get('cnpj')
+        # for instance in Manufacturer.objects.all():
+        #     if instance.name == manufacturer_name or instance.cnpj == manufacturer_cnpj:
+        #         print(f'Esse fabricante: {instance.name} e CNPJ: {instance.cnpj} já existem.')
+
+
     
 
 class SupplierForm(ModelForm):
