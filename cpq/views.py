@@ -1,18 +1,20 @@
-from django.shortcuts import render, redirect
 from django.http import Http404
+from django.shortcuts import render, redirect
+
 from .forms import ManufacturerForm, SupplierForm, MaterialForm
+
 from .models import *
 # Create your views here.
 
 
 def manufacturer_insert(request):
-    manufacturer_form_data = request.session.get('manufacturer_form_data', None)
-    # if request.method == "POST" :
-    #     form = ManufacturerForm(manufacturer_form_data)
-    #     if form.is_valid():
-    #         form.save()
-    # else:
-    form = ManufacturerForm(manufacturer_form_data)
+    if request.method == "POST":
+        form = ManufacturerForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = ManufacturerForm()
+
 
     context = {"form": form}
     return render(request, 'cpq/manufacture_insert.html', context)
@@ -27,7 +29,6 @@ def manufacturer_created(request):
     form = ManufacturerForm(request.POST)
 
     return redirect('cpq:manufacturer_insert')
-
 
 def manufacturer_list(request):
     manufacturers = Manufacturer.objects.all().order_by('name')
