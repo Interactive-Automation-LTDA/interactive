@@ -9,16 +9,18 @@
     <div class="container col-md-4">
         <div class="col align-self-center">
             <form action="{% url 'cpq:manufacturer_insert' %}" method="post" style="text-align: center; padding-top: 20px;">{% csrf_token %}
-                {% render_field form.name placeholder="nome" class+="form-control" %}
-                <br>
-                <br>
-                {% render_field form.cnpj placeholder="cnpj" class+="form-control" %}
-                <br>
-                <br>
-                {% if form.errors %}
-                    {{ form.errors }}
                 
-                {% endif %}
+                {% for field in form.visible_fields %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}"></label>
+                    {% render_field field class="form-control" placeholder=field.label class+="form-control"%}
+                    {% for error in field.errors %}
+                    <br>
+                      <span class="badge bg-warning text-dark">{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                {% endfor %}
+                <br>
                 <button type="submit" name="manufacture_insert" class="btn btn-outline-primary">Inserir</button>
             </form>
         </div>

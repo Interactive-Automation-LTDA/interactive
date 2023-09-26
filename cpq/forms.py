@@ -10,29 +10,24 @@ class ManufacturerForm(forms.ModelForm):
         fields = ['name', 'cnpj']
 
 
-        labels = {
-            'name': 'Digite seu nome'
-        }
-
     def clean_name(self):
         manufacturer_name = self.cleaned_data.get('name')
         for instance in Manufacturer.objects.all():
             if instance.name == manufacturer_name:
-                raise ValidationError(f'O Fabricante {instance.name} já existe')
+                raise ValidationError(f'O Fabricante: {instance.name} já está cadastrado!!.')
         return manufacturer_name
     
-        # manufacturer_name = self.cleaned_data.get('name')
-        # manufacturer_cnpj = self.cleaned_data.get('cnpj')
-        # for instance in Manufacturer.objects.all():
-        #     if instance.name == manufacturer_name or instance.cnpj == manufacturer_cnpj:
-        #         print(f'Esse fabricante: {instance.name} e CNPJ: {instance.cnpj} já existem.')
 
+    def clean_cnpj(self):
+        manufacturer_cnpj = self.cleaned_data.get('cnpj')
+        for instance in Manufacturer.objects.all():
+            if instance.cnpj == manufacturer_cnpj:
+                raise ValidationError(f'Este CNPJ: {instance.cnpj} já está cadastrado!!.')
 
+        return manufacturer_cnpj
     
 
 class SupplierForm(ModelForm):
-    name = forms.CharField()
-    cnpj = forms.CharField()
 
     class Meta:
         model = Supplier
