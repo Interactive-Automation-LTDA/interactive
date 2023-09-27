@@ -1,4 +1,5 @@
 {% extends "cpq/base.html" %}
+
 {% load widget_tweaks %}
 
 {% block manufacturer_insert %}
@@ -6,20 +7,21 @@
     
     <h1 style="text-align: center; padding-top: 20px;">Inserir Fabricantes</h1>
 
+    {% include "cpq/messages.html" %}
+
     <div class="container col-md-4">
         <div class="col align-self-center">
             <form action="{% url 'cpq:manufacturer_insert' %}" method="post" style="text-align: center; padding-top: 20px;">{% csrf_token %}
-                
-                {% for field in form.visible_fields %}
-                <div class="form-group">
-                    <label for="{{ field.id_for_label }}"></label>
-                    {% render_field field class="form-control" placeholder=field.label class+="form-control"%}
-                    {% for error in field.errors %}
-                    <br>
-                      <span class="badge bg-warning text-dark">{{ error }}</span>
+                    {% for field in form.visible_fields %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}"></label>
+                            {% render_field field class="form-control" placeholder=field.label class+="form-control"%}
+                            {% comment %} {% for error in field.errors %} {% endcomment %}
+                                <br>
+                                {% comment %} <div class="alert alert-warning" id="warning_error" role="alert">{{ error }}</div> {% endcomment %}
+                            {% comment %} {% endfor %} {% endcomment %}
+                        </div>
                     {% endfor %}
-                  </div>
-                {% endfor %}
                 <br>
                 <button type="submit" name="manufacture_insert" class="btn btn-outline-primary">Inserir</button>
             </form>
