@@ -38,8 +38,8 @@ setTimeout(function(){
   message_ele.style.display = "none"; 
 }, 3000);
 
-// var message_ele2 = document.getElementById("warning_error");
+var message_ele2 = document.getElementById("warning_error");
 
-// setTimeout(function(){ 
-//   message_ele.style.display = "none"; 
-// }, 4000);
+setTimeout(function(){ 
+  message_ele.style.display = "none"; 
+}, 4000);
