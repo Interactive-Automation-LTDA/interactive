@@ -40,9 +40,9 @@ class Supplier(models.Model):
         
 
 class Material(models.Model):
-    ncm_code = models.IntegerField()
-    material_code = models.IntegerField()
-    name = models.CharField(max_length=55)
+    ncm_code = models.CharField(max_length=55, unique=True)
+    material_code = models.CharField(max_length=55, unique=True)
+    name = models.CharField(max_length=55, unique=True)
     description = models.TextField()
     unit = models.CharField(max_length=55)
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)

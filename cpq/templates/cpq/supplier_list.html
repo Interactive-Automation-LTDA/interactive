@@ -2,7 +2,7 @@
 
 {% block supplier_list %}
 
-    <title>{% block title %}Fabricantes{% endblock title %}</title>
+    <title>{% block title %}Fornecedores{% endblock title %}</title>
     <h1 style="text-align: center; padding-top: 10px;">Fornecedores</h1>
 
     <div class="container mt-5 mb-5 justify-content-center align-items-center flex-column">
@@ -19,10 +19,10 @@
                 
                 <tbody>
                     <!-- Inicio Corpo Tabela-->
-                    {% for manufacturer in manufacturers %}
+                    {% for supplier in suppliers %}
                         <tr>
-                            <td>{{ manufacturer.name }}</td>
-                            <td>{{ manufacturer.cnpj }}</td>
+                            <td>{{ supplier.name }}</td>
+                            <td>{{ supplier.cnpj }}</td>
                         </tr>
                     {% endfor %}
                     <!-- Fim Corpo Tabela-->

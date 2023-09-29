@@ -4,6 +4,10 @@ from .forms import ManufacturerForm, SupplierForm, MaterialForm
 from .models import *
 
 
+def home(request):
+    return render(request, "cpq/home.html")
+
+
 def manufacturer_insert(request):
     form = ManufacturerForm()  
     if request.method == "POST":
@@ -25,12 +29,14 @@ def manufacturer_list(request):
 
 
 def supplier_insert(request):
+    form = SupplierForm()
     if request.method == "POST":
         form = SupplierForm(request.POST)
         if form.is_valid():
             form.save()
-    else:
-        form = SupplierForm()
+            messages.success(request, f"Fornecedor: {form.data['name']} cadastrado com sucesso!")
+        else:
+            messages.warning(request, f"Fornecedor: {form.data['name']} e CNPJ: {form.data['cnpj']} já cadastrados")
     
     context = {"form": form}
     return render(request, "cpq/supplier_insert.html", context)
@@ -43,12 +49,20 @@ def supplier_list(request):
 
 
 def material_insert(request):
+    form = MaterialForm()
     if request.method == "POST":
         form = MaterialForm(request.POST)
         if form.is_valid():
             form.save()
-    else:
-        form = MaterialForm()
+            messages.success(request, f"Material: {form.data['name']} cadastrado com sucesso!")
+        else:
+            messages.warning(request, f"Material: {form.data['name']} e Código: {form.data['material_code']} já cadastrados")
 
     context = {"form": form}
     return render(request, "cpq/material_insert.html", context)
+
+
+def material_list(request):
+    materials = Material.objects.all().order_by('name')
+    context = {"materials": materials}
+    return render(request, "cpq/material_list.html", context)

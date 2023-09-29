@@ -6,14 +6,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-    rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-    crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet"/>
+    
+    <link rel="stylesheet" href="{% static 'css/style_1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/mixins/_border-radius.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/mixins/_screen-reader.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/mixins/_visibility.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/_media.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/utilities/_stretched-link.css' %}">
 
+    
     <title>{% block title %}Document{% endblock title %}</title>
 </head>
 <body>
-    
+    {% block home %}{% endblock home %}
+
     {% block manufacturer_list %}{% endblock manufacturer_list %}
     {% block manufacturer_insert %}{% endblock manufacturer_insert %}
 
@@ -23,15 +33,23 @@
     {% block material_list %}{% endblock material_list %}
     {% block material_insert %}{% endblock material_insert %}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+
+    <script  src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'demo/chart-area-demo.js' %}"></script>
+    <script src="{% static 'demo/chart-bar-demo.js'  %}"></script>
+    <script src="{% static 'demo/chart-pie-demo.js' %}"></script>
+    <script src="{% static 'demo/datatables-demo.js' %}"></script>
+    <script src="{% static 'js/datatables-simple-demo.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/popper.js.js' %}"></script>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" 
-    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer">
-    </script>
 
 </body>
 </html>

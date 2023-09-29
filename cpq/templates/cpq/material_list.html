@@ -1,0 +1,45 @@
+{% extends "cpq/base.html" %}
+
+{% block material_list %}
+
+    <title>{% block title %}Materiais{% endblock title %}</title>
+    <h1 style="text-align: center; padding-top: 10px;">Materiais</h1>
+
+    <div class="container mt-5 mb-5 justify-content-center align-items-center flex-column">
+        <div class="table-responsive" style="text-align: center;">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <!-- Começo Cabeçalho -->
+                    <tr>
+                        <th scope="col">Código NCM</th>
+                        <th scope="col">Código do Material</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Unidade</th>
+                        <th scope="col">Fabricante</th>
+                        <th scope="col">Fornecedor</th>
+                        <th scope="col">Estado de Origem</th>
+                    </tr>
+                    <!-- Fim Cabeçalho -->
+                </thead>
+                
+                <tbody>
+                    <!-- Inicio Corpo Tabela-->
+                    {% for material in materials %}
+                        <tr>
+                            <td>{{ material.ncm_code }}</td>
+                            <td>{{ material.material_code }}</td>
+                            <td>{{ material.name }}</td>
+                            <td>{{ material.description }}</td>
+                            <td>{{ material.unit }}</td>
+                            <td>{{ material.manufacturer }}</td>
+                            <td>{{ material.supplier }}</td>
+                            <td>{{ material.state }}</td>
+                        </tr>
+                    {% endfor %}
+                    <!-- Fim Corpo Tabela-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock material_list %}

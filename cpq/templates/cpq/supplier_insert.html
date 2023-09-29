@@ -6,16 +6,18 @@
     
     <h1 style="text-align: center; padding-top: 20px;">Inserir Fornecedor</h1>
 
+    {% include "cpq/messages.html" %}
+    
     <div class="container col-md-4">
         <div class="col align-self-center">
-            <form action="{% url "cpq:manufacturer_created" %}" method="post" style="text-align: center; padding-top: 20px;">{% csrf_token %}
+            <form action="{% url 'cpq:supplier_insert' %}" method="post" style="text-align: center; padding-top: 20px;">{% csrf_token %}
                 {% render_field form.name placeholder="nome" class+="form-control" %}
                 <br>
                 <br>
                 {% render_field form.cnpj placeholder="cnpj" class+="form-control" %}
                 <br>
                 <br>
-                <button type="submit" name="manufacture_insert" class="btn btn-outline-primary">Inserir</button>
+                <button type="submit" name="supplier_insert" class="btn btn-outline-primary">Inserir</button>
             </form>
         </div>
     </div>
