@@ -1,11 +1,27 @@
 from django.shortcuts import render
 from django.contrib import messages
-from .forms import ManufacturerForm, SupplierForm, MaterialForm
+from .forms import ManufacturerForm, SupplierForm, MaterialForm, UserSignupForm
 from .models import *
 
 
 def home(request):
+
     return render(request, "cpq/home.html")
+
+
+def signup(request):
+    form = UserSignupForm()
+    if request.method == "POST":
+        form = UserSignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f"Usuário: {form.data['username']} cadastrado com sucesso!")
+            form = UserSignupForm()
+        else:
+            messages.warning(request, f"Este usuário {form.data['username']} já existe!")
+    
+    context = {"form": form}
+    return render(request, "cpq/signup.html", context)
 
 
 def manufacturer_insert(request):
@@ -15,6 +31,7 @@ def manufacturer_insert(request):
         if form.is_valid():
             form.save()
             messages.success(request, f"Fabricante: {form.data['name']} cadastrado com sucesso!")
+            form = ManufacturerForm()
         else:
             messages.warning(request, f"Fabricante: {form.data['name']} e CNPJ: {form.data['cnpj']} já cadastrados")
 
@@ -35,6 +52,7 @@ def supplier_insert(request):
         if form.is_valid():
             form.save()
             messages.success(request, f"Fornecedor: {form.data['name']} cadastrado com sucesso!")
+            form = SupplierForm()
         else:
             messages.warning(request, f"Fornecedor: {form.data['name']} e CNPJ: {form.data['cnpj']} já cadastrados")
     
@@ -55,6 +73,7 @@ def material_insert(request):
         if form.is_valid():
             form.save()
             messages.success(request, f"Material: {form.data['name']} cadastrado com sucesso!")
+            form = MaterialForm()
         else:
             messages.warning(request, f"Material: {form.data['name']} e Código: {form.data['material_code']} já cadastrados")
 
