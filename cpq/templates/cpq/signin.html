@@ -1,0 +1,36 @@
+{% extends 'cpq/base.html' %}
+{% load widget_tweaks %}
+
+{% block signin %}
+    <title>{% block title %}Login{% endblock title %}</title>
+
+    <h1 style="text-align: center; padding-top: 20px;">Login</h1>
+
+    {% include "cpq/messages.html" %}
+    
+    <div class="container col-md-4">
+        <div class="col align-self-center">
+            
+            <form action="{% url 'cpq:signin' %}" method="post" style="text-align: center; padding-top: 20px;">{% csrf_token %}
+
+                <div class="icon-login">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100px" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+                    </svg>
+                </div>
+                <br>
+                {% render_field form.username placeholder="Nome de Usuário" class+="form-control" %}
+                <br>
+                {% render_field form.password type="password" placeholder="Senha" class+="form-control" %}
+                <br>
+                <button type="submit" name="supplier_insert" class="btn btn-outline-primary">login</button>
+                <br>
+                <br>
+
+                <a href="{% url 'cpq:signup' %}">Faça seu Cadastro</a>
+            </form>
+        </div>
+    </div>
+
+{% endblock signin %}

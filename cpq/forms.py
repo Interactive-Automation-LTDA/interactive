@@ -4,6 +4,13 @@ from .models import Manufacturer, Supplier, Material
 from django.contrib.auth.models import User
 
 
+class UserLoginForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
+
+
 class UserSignupForm(forms.ModelForm):
 
     class Meta:
