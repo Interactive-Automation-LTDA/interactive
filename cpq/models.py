@@ -47,6 +47,7 @@ class Material(models.Model):
     unit = models.CharField(max_length=55)
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
 
     STATE = [
         ('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'), ('AM', 'Amazonas'), ('BA', 'Bahia'), 

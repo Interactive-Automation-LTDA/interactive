@@ -20,12 +20,29 @@ def signup(request):
         email = request.POST['email']
         password = request.POST['password']
 
-        new_user = User.objects.create_user(username, email, password)
-        new_user.first_name = first_name
-        new_user.last_name = last_name
-        new_user.save()
+        if User.objects.filter(username=username):
+            messages.error(request, "Este usuário já existe!")
+            
+        
+        if User.objects.filter(email=email):
+            messages.error(request, "Este email já existe!")
+            
 
-        messages.success(request, "Usuário criado com sucesso!")
+        if len(username) < 10:
+            messages.error(request, "Nome de usuário necessita ter ao mínimo dez caracteres!")
+            
+
+        if not username.isalnum():
+            messages.error(request, "Nome de usuário precisa ser alpha numérico!")
+            
+        else:
+
+            new_user = User.objects.create_user(username, email, password)
+            new_user.first_name = first_name
+            new_user.last_name = last_name
+            new_user.save()
+
+            messages.success(request, "Usuário criado com sucesso!")
     
     context = {"form": form}
     return render(request, "cpq/signup.html", context)

@@ -1,77 +1,111 @@
 {% extends 'cpq/base.html' %}
 
 {% block home %}
-<div class="wrapper d-flex align-items-stretch">
-<nav id="sidebar">
-    <div class="custom-menu">
-    <button type="button" id="sidebarCollapse" class="btn btn-primary">
-        <i class="fa fa-bars"></i>
-        <span class="sr-only">Toggle Menu</span>
-    </button>
-    </div>
-    <div class="p-4">
-    <h1><a href="index.html" class="logo">Interactive <span>Automation Systems</span></a></h1>
-    <ul class="list-unstyled components mb-5">
-        <li class="active">
-        <a href="#"><span class="fa fa-home mr-3"></span> Home</a>
-        </li>
-        <li>
-        <a href="{% url 'cpq:material_list' %}"><span class="fa fa-user mr-3"></span>Materiais</a>
-        </li>
-        <li>
-        <a href="#"><span class="fa fa-briefcase mr-3"></span> Works</a>
-        </li>
-        <li>
-        <a href="#"><span class="fa fa-sticky-note mr-3"></span> Blog</a>
-        </li>
-        <li>
-        <a href="#"><span class="fa fa-suitcase mr-3"></span> Gallery</a>
-        </li>
-        <li>
-        <a href="#"><span class="fa fa-cogs mr-3"></span> Services</a>
-        </li>
-        <li>
-        <a href="#"><span class="fa fa-paper-plane mr-3"></span> Contacts</a>
-        </li>
-    </ul>
-
-    <div class="mb-5">
-        <h3 class="h6 mb-3">Subscribe for newsletter</h3>
-        <form action="#" class="subscribe-form">
-        <div class="form-group d-flex">
-            <div class="icon">
-            <span class="icon-paper-plane"></span>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link align-middle px-0">
+                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="bi bi-menu-button-wide"></i> <span class="ms-1 d-none d-sm-inline">CPQ</span> </a>
+                            <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1 </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
+                        </li>
+                        <li>
+                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span> </a>
+                                <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 1</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <div class="dropdown pb-4">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img style="margin-right: 8px;" src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            {% block start %}
+                                {% if user.is_authenticated %}
+                                    <span class="d-none d-sm-inline mx-1">{{user.username}}</span>
+                                {% else %}
+                                    <p>Usuário</p>
+                                {% endif %}
+                            {% endblock start %}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                            <li><a class="dropdown-item" href="{% url 'cpq:signin' %}">Login</a></li>
+                            <li><a class="dropdown-item" href="#">Perfil</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="btn" href="{% url 'cpq:logout' %}">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <input type="text" class="form-control" placeholder="Enter Email Address" />
+
+
+                <!-- <section  class="container" style="margin-top: auto;">
+                    <footer class="bg-dark text-center text-white" style="background-color: #0a4275; margin-top: auto;">
+                        <div class="container p-4 pb-2">
+                            <section class="">
+                            <p class="d-flex justify-content-center align-items-center">
+                                <span class="me-3">Register for free</span>
+                                <button type="button" class="btn btn-outline-light btn-rounded">
+                                Sign up!
+                                </button>
+                            </p>
+                            </section>
+                        </div>
+                        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                            © 2020 Copyright:
+                            <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+                        </div>
+                    </footer>
+                </section> -->
         </div>
-        </form>
     </div>
-
-    <div class="footer">
-        <p>
-        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-        Copyright &copy;<script>
-                            document.write(new Date().getFullYear())
-                        </script>All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
-        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-        </p>
-    </div>
-    </div>
-</nav>
-
-<!-- Page Content -->
-<div id="content" class="p-4 p-md-5 pt-5">
-    <h2 class="mb-4">User Info</h2>
-    {% block start %}
-        {% if user.is_authenticated %}
-        
-            <center><h3>Bem vindo {{user.username}}!</h3></center>
-
-        {% else %}
-            <center><h3>log in, plz . . .</31></center>
-        {% endif %}
-    {% endblock start %}
-</div>
-<a class="btn" href="{% url 'cpq:logout' %}">Logout</a>
-</div>
-{% endblock %}
+    
+{% endblock home %}
