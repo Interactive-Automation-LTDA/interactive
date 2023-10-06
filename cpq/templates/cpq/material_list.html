@@ -38,7 +38,7 @@
                             <td>{{ material.manufacturer }}</td>
                             <td>{{ material.supplier }}</td>
                             <td>{{ material.state }}</td>
-                            <td><button type="submit" name="supplier_insert" class="btn btn-outline-primary">Inserir</button></td>
+                            <td><button data-product="{{material.id}}" data-action="add" class="btn btn-outline-primary add-btn update-cart">Inserir</button></td>
                         </tr>
                     {% endfor %}
                     <!-- Fim Corpo Tabela-->
