@@ -3,7 +3,9 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .forms import ManufacturerForm, SupplierForm, MaterialForm, UserSignupForm, UserLoginForm
-from .models import *
+from cpq.models import Manufacturer, Supplier, Material
+from django.http import JsonResponse
+import json
 
 
 def home(request):
@@ -135,3 +137,16 @@ def material_list(request):
     materials = Material.objects.all().order_by('name')
     context = {"materials": materials}
     return render(request, "cpq/material_list.html", context)
+
+
+def material_update(request):
+    data = json.loads(request.body)
+    product_id = data['productID']
+    action = data['action']
+    
+    print(f"'product_id:'{product_id}, 'action': {action}")
+
+    customer = request.user.customer
+    material = Material.objects.get(id=product_id)
+    
+    return JsonResponse("Material Update View", safe=False)
