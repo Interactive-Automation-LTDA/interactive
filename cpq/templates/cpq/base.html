@@ -49,7 +49,13 @@
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/popper.js' %}"></script>
     <script src="{% static 'js/cpq.js' %}"></script>
-    
+
+
+    <!-- Init: grab logged user to js comunication -->
+    <script>
+        let user = '{{ request.user }}'
+    </script>
+    <!-- End: grab logged user to js comunication -->
     
 
 </body>
