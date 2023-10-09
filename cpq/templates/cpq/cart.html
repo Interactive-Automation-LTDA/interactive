@@ -1,0 +1,62 @@
+{% extends 'cpq/base.html' %}
+
+{% block cart %}
+
+<title>{% block title %}Carrinho{% endblock title %}</title>
+<h1 style="text-align: center; padding-top: 10px;">Carrinho</h1>
+
+<div class="container-xl mt-4 mb-4 justify-content-center align-items-center flex-column">
+    <div class="table-responsive" style="text-align: center;">
+        <div class="box-element">
+            <a class="btn btn-outline-dark" href="">&#x2190; Continue Comprando</a>
+            <br>
+            <br>
+
+            <table class="table">
+                <tr>
+                    <th><h5>Itens: <strong>{{ order.get_cart_items }}</strong></h5></th>
+                    <th><th><h5>Total: <strong>R${{ order.get_cart_total }}</strong></h5></th></th>
+                    <th>
+                        <a style="float: right;  margin: 5px;" class="btn btn-success" href="">
+                            Finalizar</a>
+                    </th>
+                </tr>
+            </table>
+        </div>
+        <br>
+
+        <div class="container-xl mt-4 mb-4 justify-content-center align-items-center flex-column">
+            <div class="table-responsive" style="text-align: center;">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <!-- Começo Cabeçalho -->
+                        <tr>
+                            <th scope="col">Código Item</th>
+                            <th scope="col">Preço</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                        <!-- Fim Cabeçalho -->
+                    </thead>
+                    
+                    <tbody>
+                        <!-- Inicio Corpo Tabela-->
+                        {% for item in items %}
+                            <tr>
+                                <td>{{ item.material.ncm_code }}</td>
+                                <td>{{ item.material.price }}</td>
+                                <td>{{ item.material.name }}</td>
+                                <td>{{ item.material.unit }}</td>
+                                <td>{{ item.get_total }}</td>
+                            </tr>
+                        {% endfor %}
+                        <!-- Fim Corpo Tabela-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock cart %}

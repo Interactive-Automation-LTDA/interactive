@@ -1,16 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views as auth
-from cpq.views import (
-    home, 
-    signup, 
-    signin,  
-    manufacturer_insert,  
-    manufacturer_list,
-    supplier_insert, 
-    supplier_list,
-    material_insert,
-    material_list,
-    material_update)
+from .views import *
 
 
 app_name = 'cpq'
@@ -27,4 +17,6 @@ urlpatterns = [
     path('material_insert/', material_insert, name='material_insert'),
     path('material_list/', material_list, name='material_list'),
     path('material_update/', material_update, name='material_update'),
+    path('cart/', cart, name='cart'),
+    path('checkout/', checkout, name='checkout'),
 ]

@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
 from cpq.utils import formatters, validators
 
 validator = validators.Validator()
+
 
 class Manufacturer(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -47,7 +49,7 @@ class Material(models.Model):
     unit = models.CharField(max_length=55)
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    price = models.DecimalField(max_digits=5, decimal_places=3)
 
     STATE = [
         ('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'), ('AM', 'Amazonas'), ('BA', 'Bahia'), 
@@ -62,3 +64,63 @@ class Material(models.Model):
 
     def __str__(self) -> str:
         return self.name
+    
+
+class Order(models.Model):
+    user = models.ForeignKey(User,  on_delete=models.SET_NULL, null=True,blank=True)
+    date_ordered = models.DateTimeField(auto_now=True)
+    complete = models.BooleanField(default=False)
+    transaction_id = models.CharField(max_length=100, null=True)
+
+    def __str__(self) -> str:
+        return str(self.id)
+    
+    @property
+    def get_cart_total(self):
+        orderitems = self.orderitem_set.all()
+        total = sum([item.get_total for item in orderitems])
+        return total
+    
+    @property
+    def get_cart_items(self):
+        orderitems = self.orderitem_set.all()
+        total = sum([item.quantity for item in orderitems])
+        return total
+    
+
+class OrderItem(models.Model):
+    material = models.ForeignKey(Material, on_delete=models.SET_NULL, blank=True, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
+    quantity = models.IntegerField(default=0,  null=True,  blank=True)
+    date_added = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return str(self.material.name)
+    
+    @property
+    def get_total(self):
+        total  = self.material.price * self.quantity
+        return total
+
+
+class ShippingAddress(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order,  on_delete=models.SET_NULL, null=True)
+    address = models.CharField(max_length=200, null=False)
+    city = models.CharField(max_length=200, null=False)
+
+    STATE = [
+        ('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'), ('AM', 'Amazonas'), ('BA', 'Bahia'), 
+        ('CE', 'Ceará'), ('DF', 'Distrito Federal'), ('ES', 'Espírito Santo'), ('GO', 'Goiás'), 
+        ('MA', 'Maranhão'), ('MT', 'Mato Grosso'), ('MS', 'Mato Grosso do Sul'), ('MG', 'Minas Gerais'), 
+        ('PA', 'Pará'), ('PB', 'Paraíba'), ('PR', 'Paraná'), ('PE', 'Pernambuco'), ('PI', 'Piauí'), 
+        ('RJ', 'Rio de Janeiro'), ('RN', 'Rio Grande do Norte'), ('RS', 'Rio Grande do Sul'), ('RO', 'Rondônia'), 
+        ('RR', 'Roraima'), ('SC', 'Santa Catarina'), ('SP', 'São Paulo'), ('SE', 'Sergipe'), ('TO', 'Tocantins')
+    ]
+
+    state = models.CharField(max_length=30, choices=STATE)
+    zip_code = models.CharField(max_length=200,  null=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return  str(self.address)

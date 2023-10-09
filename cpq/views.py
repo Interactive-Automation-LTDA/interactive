@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .forms import ManufacturerForm, SupplierForm, MaterialForm, UserSignupForm, UserLoginForm
-from cpq.models import Manufacturer, Supplier, Material
+from .models import *
 from django.http import JsonResponse
 import json
 
@@ -131,6 +131,34 @@ def material_insert(request):
 
     context = {"form": form}
     return render(request, "cpq/material_insert.html", context)
+
+
+def cart(request):
+
+    if request.user.is_authenticated:
+        user = request.user
+        order, created = Order.objects.get_or_create(user=user, complete=False)
+        items = order.orderitem_set.all()
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+
+    context = {'items': items, 'order': order}
+    return render(request, "cpq/cart.html", context)
+
+
+def checkout(request):
+
+    if request.user.is_authenticated:
+        user = request.user
+        order, created = Order.objects.get_or_create(user=user, complete=False)
+        items = order.orderitem_set.all()
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+
+    context = {'items': items, 'order': order}
+    return render(request, 'cpq/checkout.html', context)
 
 
 def material_list(request):
