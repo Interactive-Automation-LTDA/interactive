@@ -8,7 +8,7 @@
 <div class="container-xl mt-4 mb-4 justify-content-center align-items-center flex-column">
     <div class="table-responsive" style="text-align: center;">
         <div class="box-element">
-            <a class="btn btn-outline-dark" href="">&#x2190; Continue Comprando</a>
+            <a class="btn btn-outline-dark" href="">&#x2190; Continue Cotando</a>
             <br>
             <br>
 
@@ -34,6 +34,7 @@
                             <th scope="col">Código Item</th>
                             <th scope="col">Preço</th>
                             <th scope="col">Nome</th>
+                            <th scope="col">Unidade</th>
                             <th scope="col">Quantidade</th>
                             <th scope="col">Total</th>
                         </tr>
@@ -48,6 +49,11 @@
                                 <td>{{ item.material.price }}</td>
                                 <td>{{ item.material.name }}</td>
                                 <td>{{ item.material.unit }}</td>
+                                <td>
+                                    <p class="quantity">{{item.quantity}}</p>
+                                    <i data-product="{{ item.material.id }}" data-action="remove" class="bi bi-arrow-down-circle update-cart"></i>
+                                    <i data-product="{{ item.material.id }}" data-action="add" class="bi bi-arrow-up-circle update-cart"></i>
+                                </td>
                                 <td>{{ item.get_total }}</td>
                             </tr>
                         {% endfor %}

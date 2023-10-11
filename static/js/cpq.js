@@ -16,7 +16,7 @@ for (let index = 0; index < updateBtns.length; index++) {
     })
 }
 
-function updateUserOrder(productID,action){
+function updateUserOrder(productID, action){
     const url = '/cpq/material_update/'
 
     fetch(url, {
@@ -27,10 +27,11 @@ function updateUserOrder(productID,action){
         },
         body: JSON.stringify({'productID': productID, 'action': action})
     })
-    .then((response) =>{
+    .then((response) => {
         return response.json();
     })
     .then((data) => {
         console.log('Data:', data)
+        location.reload()
     })
 }

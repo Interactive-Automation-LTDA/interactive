@@ -133,17 +133,36 @@ def material_insert(request):
     return render(request, "cpq/material_insert.html", context)
 
 
+def store(request):
+    if request.user.is_authenticated:
+        user = request.user
+        order, created = Order.objects.get_or_create(user=user, complete=False)
+        items = order.orderitem_set.all()
+        cart_items = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cart_items = order['get_cart_items']
+
+    materials = Material.objects.all()
+    context = {'materials': materials, 'cart_items': cart_items}
+
+    return render(request, '', context)
+
+
 def cart(request):
 
     if request.user.is_authenticated:
         user = request.user
         order, created = Order.objects.get_or_create(user=user, complete=False)
         items = order.orderitem_set.all()
+        cart_items = order.get_cart_items
     else:
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cart_items = order['get_cart_items']
 
-    context = {'items': items, 'order': order}
+    context = {'items': items, 'order': order, 'cart_items': cart_items}
     return render(request, "cpq/cart.html", context)
 
 
@@ -153,11 +172,13 @@ def checkout(request):
         user = request.user
         order, created = Order.objects.get_or_create(user=user, complete=False)
         items = order.orderitem_set.all()
+        cart_items = order.get_cart_items
     else:
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cart_items = order['get_cart_items']
 
-    context = {'items': items, 'order': order}
+    context = {'items': items, 'order': order, 'cart_items': cart_items}
     return render(request, 'cpq/checkout.html', context)
 
 
@@ -174,7 +195,19 @@ def material_update(request):
     
     print(f"'product_id:'{product_id}, 'action': {action}")
 
-    customer = request.user.customer
+    user = request.user
     material = Material.objects.get(id=product_id)
+    order, created = Order.objects.get_or_create(user=user, complete=False)
+    order_item, created = OrderItem.objects.get_or_create(order=order, material=material)
+
+    if action == 'add':
+        order_item.quantity = order_item.quantity  + 1
+    elif action == 'remove':
+         order_item.quantity = order_item.quantity  - 1
     
+    order_item.save()
+
+    if order_item.quantity <=  0:
+        order_item.delete()
+        
     return JsonResponse("Material Update View", safe=False)
