@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .forms import ManufacturerForm, SupplierForm, MaterialForm, UserSignupForm, UserLoginForm
+from .forms import ManufacturerForm, SupplierForm, MaterialForm, UserSignupForm, UserLoginForm, MachineForm
 from .models import *
 from django.http import JsonResponse
 import json
@@ -24,19 +24,15 @@ def signup(request):
 
         if User.objects.filter(username=username):
             messages.error(request, "Este usuário já existe!")
-            
         
         if User.objects.filter(email=email):
             messages.error(request, "Este email já existe!")
             
-
         if len(username) < 10:
             messages.error(request, "Nome de usuário necessita ter ao mínimo dez caracteres!")
             
-
         if not username.isalnum():
             messages.error(request, "Nome de usuário precisa ser alpha numérico!")
-            
         else:
 
             new_user = User.objects.create_user(username, email, password)
@@ -66,7 +62,6 @@ def signin(request):
         else:
             messages.error(request, "Usuário  inválido")
         
-    
     context = {"form": form}
     return render(request, 'cpq/signin.html', context)
 
@@ -211,3 +206,18 @@ def material_update(request):
         order_item.delete()
         
     return JsonResponse("Material Update View", safe=False)
+
+
+def machine_insert(request):
+    form = MachineForm()  
+    if request.method == "POST":
+        form = MachineForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f"Máquina: {form.data['name']} cadastrada com sucesso!")
+            form = MachineForm()
+        else:
+            messages.warning(request, f"Máquina: {form.data['name']} já cadastrada")
+
+    context = {"form": form}
+    return render(request, "cpq/machine_insert.html", context)

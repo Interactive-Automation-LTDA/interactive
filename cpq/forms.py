@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Manufacturer, Supplier, Material
+from .models import Manufacturer, Supplier, Material, Machine
 from django.contrib.auth.models import User
 
 
@@ -17,11 +17,13 @@ class UserSignupForm(forms.ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password']
 
+
 class ManufacturerForm(forms.ModelForm):
 
     class Meta:
         model = Manufacturer
         fields = ['name', 'cnpj']
+
 
 class SupplierForm(ModelForm):
 
@@ -31,7 +33,6 @@ class SupplierForm(ModelForm):
 
 
 class MaterialForm(ModelForm):
-
 
     class Meta:
         model = Material
@@ -46,3 +47,10 @@ class MaterialForm(ModelForm):
             'supplier',
             'state'
             ]
+        
+
+class MachineForm(ModelForm):
+
+    class Meta:
+        model = Machine
+        fields = ['name', 'manufacturer', 'supplier', 'material']

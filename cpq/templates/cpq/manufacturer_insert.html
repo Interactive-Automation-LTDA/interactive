@@ -16,10 +16,7 @@
                         <div class="form-group">
                             <label for="{{ field.id_for_label }}"></label>
                             {% render_field field class="form-control" placeholder=field.label class+="form-control"%}
-                            {% comment %} {% for error in field.errors %} {% endcomment %}
                                 <br>
-                                {% comment %} <div class="alert alert-warning" id="warning_error" role="alert">{{ error }}</div> {% endcomment %}
-                            {% comment %} {% endfor %} {% endcomment %}
                         </div>
                     {% endfor %}
                 <br>

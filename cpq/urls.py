@@ -19,4 +19,5 @@ urlpatterns = [
     path('material_update/', material_update, name='material_update'),
     path('cart/', cart, name='cart'),
     path('checkout/', checkout, name='checkout'),
+    path('machine_insert/', machine_insert, name='machine_insert'),
 ]
