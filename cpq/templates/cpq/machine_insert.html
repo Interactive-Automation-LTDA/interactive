@@ -1,0 +1,37 @@
+{% extends "cpq/base.html" %}
+{% load widget_tweaks %}
+
+{% block machine_insert %}
+    <title>{% block title %}Inserir Máquina{% endblock title %}</title>
+    
+    <h1 style="text-align: center; padding-top: 20px;">Cadastrar Máquina</h1>
+
+    {% include "cpq/messages.html" %}
+
+    <div class="container col-md-6">
+        <div class="col align-self-center">
+            <form action="{% url 'cpq:machine_insert' %}" method="post" style="text-align: center; padding-top: 20px;">{% csrf_token %}
+                {% render_field form.name placeholder="nome" class+="form-control" %}
+                <br>
+                <label for="fabricante">Fabricante</label>
+                <br>
+                {% render_field form.manufacturer placeholder="Fabricante" class+="form-control" %}
+                <br>
+                <label for="fornecedor">Fornecedor</label>
+                <br>
+                {% render_field form.supplier placeholder="Fornecedor" class+="form-control" %}
+                <br>
+                <label for="materiais">Materiais</label>
+                <br>
+
+                <p style="display: flex; justify-content: center; align-items: center;">
+                    {% render_field form.material placeholder="Material" class+="form-control" %}
+                    <i class="bi bi-plus-square" style="margin-left: 5px; font-size:38px;"></i>
+                </p>
+
+                <br>
+                <button type="submit" name="supplier_insert" class="btn btn-outline-primary">Inserir</button>   
+            </form>
+        </div>
+    </div>
+{% endblock machine_insert %}
