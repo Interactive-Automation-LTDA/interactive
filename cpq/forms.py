@@ -53,4 +53,4 @@ class MachineForm(ModelForm):
 
     class Meta:
         model = Machine
-        fields = ['name', 'manufacturer', 'supplier', 'material']
+        fields = ['name', 'manufacturer', 'supplier', 'material', 'price']

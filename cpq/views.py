@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .forms import ManufacturerForm, SupplierForm, MaterialForm, UserSignupForm, UserLoginForm, MachineForm
+from .forms import *
 from .models import *
 from django.http import JsonResponse
 import json
@@ -187,8 +187,6 @@ def material_update(request):
     data = json.loads(request.body)
     product_id = data['productID']
     action = data['action']
-    
-    print(f"'product_id:'{product_id}, 'action': {action}")
 
     user = request.user
     material = Material.objects.get(id=product_id)
@@ -221,3 +219,9 @@ def machine_insert(request):
 
     context = {"form": form}
     return render(request, "cpq/machine_insert.html", context)
+
+
+def machine_list(request):
+    machines = Machine.objects.all().order_by('name')
+    context = {"machines": machines}
+    return render(request, 'cpq/machine_list.html', context)

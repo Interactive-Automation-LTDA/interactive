@@ -130,7 +130,8 @@ class Machine(models.Model):
     name = models.CharField(max_length=100, null=False, unique=True)
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.DO_NOTHING)
     supplier = models.ForeignKey(Supplier, on_delete=models.DO_NOTHING)
-    material = models.ForeignKey(Material, on_delete=models.DO_NOTHING)
+    material = models.ManyToManyField(Material)
+    price = models.DecimalField(max_digits=5, decimal_places=3)
 
     def __str__(self)-> str:
         return str(self.name)

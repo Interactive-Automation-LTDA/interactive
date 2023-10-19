@@ -23,12 +23,9 @@
                 <br>
                 <label for="materiais">Materiais</label>
                 <br>
-
-                <p style="display: flex; justify-content: center; align-items: center;">
-                    {% render_field form.material placeholder="Material" class+="form-control" %}
-                    <i class="bi bi-plus-square" style="margin-left: 5px; font-size:38px;"></i>
-                </p>
-
+                {% render_field form.material placeholder="Material" class+="form-control" %}
+                <br>
+                {% render_field form.price placeholder="Preço" class+="form-control" %}
                 <br>
                 <button type="submit" name="supplier_insert" class="btn btn-outline-primary">Inserir</button>   
             </form>
