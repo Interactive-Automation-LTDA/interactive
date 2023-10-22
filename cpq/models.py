@@ -64,7 +64,7 @@ class Material(models.Model):
 
     def __str__(self) -> str:
         return self.name
-    
+
 
 class Order(models.Model):
     user = models.ForeignKey(User,  on_delete=models.SET_NULL, null=True,blank=True)
@@ -86,13 +86,25 @@ class Order(models.Model):
         orderitems = self.orderitem_set.all()
         total = sum([item.quantity for item in orderitems])
         return total
-    
+
+
+class Machine(models.Model):
+    name = models.CharField(max_length=100, null=False, unique=True)
+    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.DO_NOTHING)
+    supplier = models.ForeignKey(Supplier, on_delete=models.DO_NOTHING)
+    material = models.ManyToManyField(Material)
+    price = models.DecimalField(max_digits=5, decimal_places=3)
+
+    def __str__(self)-> str:
+        return str(self.name)
+
 
 class OrderItem(models.Model):
     material = models.ForeignKey(Material, on_delete=models.SET_NULL, blank=True, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
     quantity = models.IntegerField(default=0,  null=True,  blank=True)
     date_added = models.DateTimeField(auto_now=True)
+    machine = models.ForeignKey(Machine, on_delete=models.SET_NULL, null=True)
 
     def __str__(self) -> str:
         return str(self.material.name)
@@ -125,13 +137,3 @@ class ShippingAddress(models.Model):
     def __str__(self) -> str:
         return  str(self.address)
     
-
-class Machine(models.Model):
-    name = models.CharField(max_length=100, null=False, unique=True)
-    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.DO_NOTHING)
-    supplier = models.ForeignKey(Supplier, on_delete=models.DO_NOTHING)
-    material = models.ManyToManyField(Material)
-    price = models.DecimalField(max_digits=5, decimal_places=3)
-
-    def __str__(self)-> str:
-        return str(self.name)

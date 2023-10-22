@@ -16,6 +16,7 @@
           <th scope="col">Fornecedor</th>
           <th scope="col">Materiais</th>
           <th scope="col">Preço</th>
+          <th scope="col">Adicionar</th>
         </tr>
         <!-- Fim Cabeçalho -->
       </thead>
@@ -33,6 +34,7 @@
             {% endfor %}
             
             <td>{{ machine.price }}</td>
+            <td><button data-product="{{machine.id}}" data-action="add" class="btn btn-outline-primary add-btn update-cart">Inserir</button></td>
           </tr>
         {% endfor %}
         <!-- Fim Corpo Tabela -->
@@ -40,18 +42,4 @@
     </table>
   </div>
 </div>
-
-<!-- Inicio dos cards--->
-<!-- <div class="container" style="display: flex;">
-    {% for machine in machines %}
-        <div class="card" style="width: 18rem; margin: 5px;">
-            <div class="card-body" style="width: 100%; text-align: center;">
-                <h4 class="card-title" >{{ machine.name }}</h4>
-                    <p>CNPJ: {{ machine.manufacturer }}</p>
-                <a href="#" class="btn btn-outline-info">Detalhes</a>
-            </div>
-        </div>
-    {% endfor %}
-</div> -->
-<!-- Fim dos cards--->
 {% endblock machine_list %}
